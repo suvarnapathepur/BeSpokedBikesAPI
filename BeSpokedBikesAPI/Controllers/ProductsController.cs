@@ -2,6 +2,7 @@
 using BeSpokedBikesAPI.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace BeSpokedBikesAPI.Controllers
 {
@@ -53,6 +54,24 @@ namespace BeSpokedBikesAPI.Controllers
             product.Id = id;
             await _productRepository.Update(product);
             return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                await _productRepository.Delete(id);
+                return NoContent();
+            }
+            catch (SqlException ex) when (ex.Number == 547) // Foreign Key violation
+            {
+                return BadRequest(new { message = "Cannot delete product as it is referenced in sales." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while deleting the product." });
+            }
         }
     }
 

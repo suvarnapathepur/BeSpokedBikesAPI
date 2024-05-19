@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DapperContext>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ISalespersonRepository, SalespersonRepository>();
 
 var app = builder.Build();
 

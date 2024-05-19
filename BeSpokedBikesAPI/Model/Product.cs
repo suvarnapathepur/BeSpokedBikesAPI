@@ -1,8 +1,12 @@
-﻿namespace BeSpokedBikesAPI.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BeSpokedBikesAPI.Model
 {
     public class Product
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(30)]
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public string Style { get; set; }

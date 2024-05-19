@@ -6,8 +6,8 @@ namespace BeSpokedBikesAPI.Interface
     {
         Task<IEnumerable<Salesperson>> GetAll();
         Task<Salesperson> GetById(int id);
-        Task Add(Salesperson product);
+        //Task Add(Salesperson product);
         Task Update(Salesperson product);
-        Task Delete(int id);
+        //Task Delete(int id);
     }
 }

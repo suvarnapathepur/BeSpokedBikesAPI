@@ -1,7 +1,9 @@
 ﻿using BeSpokedBikesAPI.Interface;
 using BeSpokedBikesAPI.Model;
+using BeSpokedBikesAPI.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace BeSpokedBikesAPI.Controllers
 {
@@ -53,6 +55,25 @@ namespace BeSpokedBikesAPI.Controllers
             customer.Id = id;
             await _customerRepository.Update(customer);
             return NoContent();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCustomer(int id)
+        {
+            try
+            {
+                await _customerRepository.Delete(id);
+                return NoContent();
+            }
+            catch (SqlException ex) when (ex.Number == 547) // Foreign Key violation
+            {
+                return BadRequest(new { message = "Cannot delete customer as it is referenced in sales." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while deleting the customer." });
+            }
         }
     }
 }
