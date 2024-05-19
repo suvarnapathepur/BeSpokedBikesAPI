@@ -21,4 +21,12 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\suvar\source\repos\BeSpokedBikesAPI\BeSpokedBikesAPI\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\suvar\source\repos\BeSpokedBikesAPI\BeSpokedBikesAPI\.editorconfig" />
+  </ItemGroup>
+
 </Project>
